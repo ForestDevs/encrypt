@@ -1,0 +1,32 @@
+syntax = "proto3";
+package decrypt;
+option go_package = "internal/pb";
+
+import "google/api/annotations.proto";
+
+message DecryptContentRequest {
+  string content = 1;
+}
+
+message DecryptContentResponse {
+  string content = 1;
+}
+
+message DecryptFileRequest {
+  string path = 1;
+}
+
+message DecryptFileResponse {}
+
+service DecryptService{
+  rpc DecryptContent(DecryptContentRequest) returns (DecryptContentResponse) {
+    option (google.api.http) = {
+      post: "/encrypt-decrypt/api/v1/decrypt"
+    };
+  }
+  rpc DecryptFile(DecryptFileRequest) returns (DecryptFileResponse){
+    option (google.api.http) = {
+      get: "/encrypt-decrypt/api/v1/decrypt/{path}"
+    };
+  }
+}

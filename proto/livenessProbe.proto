@@ -1,0 +1,20 @@
+
+syntax = "proto3";
+package livenessProbe;
+option go_package = "internal/pb";
+
+import "google/api/annotations.proto";
+
+message LivenessProbeRequest {}
+
+message LivenessProbeResponse {
+  bool result = 1;
+}
+
+service LivenessProbe{
+    rpc LivenessProbe(LivenessProbeRequest) returns (LivenessProbeResponse) {
+        option (google.api.http) = {
+                  get: "/healthz/l"
+        };
+      }
+}
